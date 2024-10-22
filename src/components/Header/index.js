@@ -1,22 +1,23 @@
+import styles from './Header.module.scss';
+
 export default function Header() {
     return(
         <header>
-        <div className="headerLeft">
+        <div className={styles.headerLeft}>
           <img
             height="40"
             width="40"
             src="/img/logo.png"
-            className="headerLogo"
             alt="logo shop"
           />
-          <div className="headerInfo">
+          <div>
             <span>React Sneakers</span>
             <p>Магазин лучших кроссовок</p>
           </div>
         </div>
         <nav>
           <ul>
-            <li className="cart">
+            <li className={styles.cart}>
               <a href="#">
                 <img src="/img/cart.svg" className="cartIcon" alt="icon cart" />
                 <span>1205 руб.</span>

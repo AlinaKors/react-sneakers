@@ -1,6 +1,6 @@
-import Header from './components/Header/Header';
-import Cart from './components/Cart/Cart';
-import Card from './components/Card/Card';
+import Header from './components/Header';
+import Cart from './components/Cart';
+import Card from './components/Card';
 
 function App() {
   return (

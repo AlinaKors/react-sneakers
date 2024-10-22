@@ -1,0 +1,83 @@
+
+
+.card{
+    list-style: none;
+    margin-top: 10px;
+    border-radius: 40px;
+    border: 1px solid #F3F3F3;
+    padding: 20px 28px 34px 32px;
+    position: relative;
+    transition: box-shadow .2s ease-out, transform .2s ease-out;
+  
+    &:hover{
+      box-shadow: 0px 14px 30px 0px #0000000D;
+      transform: translateY(-5px);
+    }
+  
+    .cardImg{
+      width: 100%;
+    }
+  
+    .favoriteIcon{
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      cursor: pointer;
+    }
+  
+    span{
+      color: #BDBDBD;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 13.31px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+  
+    .addCartContainer{
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    h2{
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.94px;
+      text-align: left;
+      min-width: 150px;
+    }
+  
+    .price{
+      display: flex;
+      flex-direction: column;
+      strong{
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16.94px;
+        text-align: left;
+        margin-top: 2px;
+        margin-bottom: 0px;
+      }
+    }
+  
+    button{
+      background: #ffffff;
+      color: #D3D3D3;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #F2F2F2;
+      cursor: pointer;
+      &:hover{
+        background: #f7f7f7;
+      }
+    };
+  
+    .addedCartBtn{
+      background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
+      color: #FFFFFF;
+      &:hover{
+        background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
+      }
+    }
+  }

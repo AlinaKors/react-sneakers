@@ -1,28 +1,30 @@
+import styles from './Card.module.scss';
+
 export default function Card() {
     return(
-        <li className="card">
+        <li className={styles.card}>
             <img
                 src="/img/favorite.svg"
-                className="favoriteIcon"
+                className={styles.favoriteIcon}
                 alt="favorite icon"
               />
               <img
                 src="/img/sneakers/sneakers1.png"
-                className="cardImg"
+                className={styles.cardImg}
                 alt="Мужские Кроссовки Nike Blazer Mid Suede"
               />
-              <h2 className="nameSneakers">
+              <h2>
                 Мужские Кроссовки Nike Blazer Mid Suede
               </h2>
-              <div className="addCartContainer">
-                <div className="price">
+              <div className={styles.addCartContainer}>
+                <div className={styles.price}>
                   <span>Цена:</span>
                   <strong>12 999 руб.</strong>
                 </div>
-                <button className="addCartBtn">
+                <button>
                   <img
                     src="img/addedToCart.svg"
-                    className="addIcon"
+                    className={styles.addIcon}
                     alt="add cart"
                   />
                 </button>

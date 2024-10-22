@@ -1,10 +1,11 @@
-import CartItem from '../CartItem/CartItem';
+import CartItem from '../CartItem';
+import styles from './Cart.module.scss';
 
 export default function Cart() {
     return(
         <div className="overlay overlayHidden">
-        <div className="cartContainer">
-          <div className="cartTitle">
+        <div className={styles.cartContainer}>
+          <div className={styles.cartTitle}>
             <span>Корзина</span>
             <img
               src="/img/close.svg"
@@ -15,18 +16,18 @@ export default function Cart() {
           <ul>
             <CartItem />
           </ul>
-          <div className="cartTotal">
-            <div className="total">
+          <div className={styles.cartTotal}>
+            <div className={styles.total}>
               <span>Итого:</span>
               <div></div>
               <strong>21 498 руб.</strong>
             </div>
-            <div className="charge">
+            <div className={styles.charge}>
               <span>Налог 5%:</span>
               <div></div>
               <strong>1074 руб.</strong>
             </div>
-            <a className="placeOrder">
+            <a>
               Оформить заказ
               <img
                 src="/img/next.svg"
