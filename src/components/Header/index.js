@@ -1,6 +1,6 @@
 import styles from './Header.module.scss';
 
-export default function Header() {
+export default function Header({clickCart}) {
     return(
         <header>
         <div className={styles.headerLeft}>
@@ -17,7 +17,7 @@ export default function Header() {
         </div>
         <nav>
           <ul>
-            <li className={styles.cart}>
+            <li className={styles.cart} onClick={clickCart}>
               <a href="#">
                 <img src="/img/cart.svg" className="cartIcon" alt="icon cart" />
                 <span>1205 руб.</span>

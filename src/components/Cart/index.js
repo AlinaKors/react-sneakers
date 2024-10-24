@@ -1,9 +1,13 @@
 import CartItem from '../CartItem';
 import styles from './Cart.module.scss';
 
-export default function Cart() {
+export default function Cart({cartView, setCartView}) {
+  const closeCart = () => {
+    cartView = setCartView(true);
+  }
+
     return(
-        <div className="overlay overlayHidden">
+        <div className={cartView ? "overlay" : "overlay overlayHidden"}>
         <div className={styles.cartContainer}>
           <div className={styles.cartTitle}>
             <span>Корзина</span>
@@ -11,6 +15,7 @@ export default function Cart() {
               src="/img/close.svg"
               className="closeIcon"
               alt="close cart"
+              onClick={() => closeCart()}
             ></img>
           </div>
           <ul>
