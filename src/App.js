@@ -1,14 +1,18 @@
 import Header from './components/Header';
 import Cart from './components/Cart';
 import Card from './components/Card';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
-
 const [cartView, setCartView] = useState(false);
+const [sneakers, setSneakers] = useState([]);
 
-const overlayView = (cartView) => {
-  cartView = setCartView(true);
+useEffect(() => {fetch('https://66b4e09a9f9169621ea4b1d9.mockapi.io/products')
+.then(res => res.json())
+.then(rezult => setSneakers(rezult))}, []);
+
+const overlayView = () => {
+  setCartView(true);
 }
 
   return (
@@ -35,10 +39,14 @@ const overlayView = (cartView) => {
         </div>
         <div className="sneakersWrapper">
           <ul>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {sneakers.map((item) => 
+              <Card
+                key={item.id}
+                name={item.title}
+                src={item.src}
+                price={item.price}
+              />
+            )}
           </ul>
         </div>
       </main>

@@ -1,6 +1,13 @@
 import styles from './Card.module.scss';
+import { useState } from 'react';
 
-export default function Card() {
+export default function Card({title, src, price}) {
+  const [addProduct, setAddProduct] = useState(false);
+
+  const addingProduct = () => {
+    setAddProduct(!addProduct);
+  }
+
     return(
         <li className={styles.card}>
             <img
@@ -9,22 +16,21 @@ export default function Card() {
                 alt="favorite icon"
               />
               <img
-                src="/img/sneakers/sneakers1.png"
+                src={src}
                 className={styles.cardImg}
-                alt="Мужские Кроссовки Nike Blazer Mid Suede"
+                alt={title}
               />
               <h2>
-                Мужские Кроссовки Nike Blazer Mid Suede
+                {title}
               </h2>
               <div className={styles.addCartContainer}>
                 <div className={styles.price}>
                   <span>Цена:</span>
-                  <strong>12 999 руб.</strong>
+                  <strong>{price}</strong>
                 </div>
-                <button>
+                <button className={addProduct ? styles.addedCartBtn : ''} onClick={() => addingProduct()}>
                   <img
-                    src="img/addedToCart.svg"
-                    className={styles.addIcon}
+                    src={addProduct ? "img/addedToCart.svg" : "img/addToCart.svg"}
                     alt="add cart"
                   />
                 </button>
