@@ -39,7 +39,8 @@ const overlayView = () => {
         </div>
         <div className="sneakersWrapper">
           <ul>
-            {sneakers.map((item) => 
+           {
+            sneakers.map((item) => 
               <Card
                 key={item.id}
                 name={item.title}

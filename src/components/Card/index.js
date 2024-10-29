@@ -1,27 +1,33 @@
 import styles from './Card.module.scss';
 import { useState } from 'react';
 
-export default function Card({title, src, price}) {
+export default function Card({name, src, price}) {
   const [addProduct, setAddProduct] = useState(false);
+  const [addFavorite, setFavorite] = useState(false);
 
   const addingProduct = () => {
     setAddProduct(!addProduct);
   }
 
+  const addingFavorite = () => {
+    setFavorite(!addFavorite);
+  }
+
     return(
         <li className={styles.card}>
             <img
-                src="/img/favorite.svg"
+                src={addFavorite ? "/img/addingFavorite.svg" : "/img/favorite.svg"}
                 className={styles.favoriteIcon}
                 alt="favorite icon"
+                onClick={() => addingFavorite()}
               />
               <img
                 src={src}
                 className={styles.cardImg}
-                alt={title}
+                alt={name}
               />
               <h2>
-                {title}
+                {name}
               </h2>
               <div className={styles.addCartContainer}>
                 <div className={styles.price}>
