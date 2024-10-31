@@ -1,16 +1,16 @@
 import styles from './Card.module.scss';
 import { useState } from 'react';
 
-export default function Card({name, src, price}) {
-  const [addProduct, setAddProduct] = useState(false);
+export default function Card({product, changeCart}) {
   const [addFavorite, setFavorite] = useState(false);
+  const [addProduct, setAddProduct] = useState(false);
 
-  const addingProduct = () => {
-    setAddProduct(!addProduct);
+  const changeFavorite = () => {
+    setFavorite(!addFavorite);
   }
 
-  const addingFavorite = () => {
-    setFavorite(!addFavorite);
+  const changeAdding = () => {
+    setAddProduct(!addProduct);
   }
 
     return(
@@ -19,22 +19,22 @@ export default function Card({name, src, price}) {
                 src={addFavorite ? "/img/addingFavorite.svg" : "/img/favorite.svg"}
                 className={styles.favoriteIcon}
                 alt="favorite icon"
-                onClick={() => addingFavorite()}
+                onClick={changeFavorite}
               />
               <img
-                src={src}
+                src={product.src}
                 className={styles.cardImg}
-                alt={name}
+                alt={product.title}
               />
               <h2>
-                {name}
+                {product.title}
               </h2>
               <div className={styles.addCartContainer}>
                 <div className={styles.price}>
                   <span>Цена:</span>
-                  <strong>{price}</strong>
+                  <strong>{product.price}</strong>
                 </div>
-                <button className={addProduct ? styles.addedCartBtn : ''} onClick={() => addingProduct()}>
+                <button className={addProduct ? styles.addedCartBtn : ''} onClick={() => { changeAdding(); changeCart(product, addProduct)}}>
                   <img
                     src={addProduct ? "img/addedToCart.svg" : "img/addToCart.svg"}
                     alt="add cart"

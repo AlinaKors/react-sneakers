@@ -1,7 +1,7 @@
 import CartItem from '../CartItem';
 import styles from './Cart.module.scss';
 
-export default function Cart({cartView, setCartView}) {
+export default function Cart({cartView, setCartView, addSneakers, deleteCart}) {
   const closeCart = () => {
     setCartView(false);
   }
@@ -15,11 +15,16 @@ export default function Cart({cartView, setCartView}) {
               src="/img/close.svg"
               className="closeIcon"
               alt="close cart"
-              onClick={() => closeCart()}
+              onClick={closeCart}
             ></img>
           </div>
           <ul>
-            <CartItem />
+            {addSneakers.map((item) => 
+            <CartItem 
+            key={item.id}
+            product={item}
+            deleteCart={deleteCart}
+            />)}
           </ul>
           <div className={styles.cartTotal}>
             <div className={styles.total}>
