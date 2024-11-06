@@ -16,55 +16,62 @@ const overlayView = () => {
   setCartView(true);
 }
 
+const updateStatus = (id) => {
+  const newSneakers = [...sneakers];
+  const product = newSneakers.find(item => item.id === id);
+  product.isAdded = !product.isAdded;
+  setSneakers(newSneakers);
+} 
+
 const addingCart = (newSneakers) => {
   setCartSneakers([...cartSneakers, newSneakers]);
+  updateStatus(newSneakers.id);
 }
 
 const deleteCart = (deleteSneakers) => {
   setCartSneakers(cartSneakers.filter(product => product.id !== deleteSneakers.id));
-}
-
-const changeCart = (product, addProduct) => {
-  addProduct ? deleteCart(product) : addingCart(product);
+  updateStatus(deleteSneakers.id);
 }
 
   return (
     <div className="wrapper">
-      <Cart 
-        cartView={cartView}
-        setCartView={setCartView}
-        addSneakers={cartSneakers}
-        deleteCart={deleteCart}
-      />
-      <Header 
-        clickCart = {overlayView}
-      />
-      <main>
-        {/* <img src="/img/banner.png" className="banners" alt="banner 1" /> */}
-        <div className="containerTitle">
-          <h1>Все кроссовки</h1>
-          <div className="searchContainer">
-            <img
-              src="/img/search.svg"
-              className="searchIcon"
-              alt="icon search"
-            />
-            <input className="search" placeholder="Поиск..."></input>
-          </div>
-        </div>
-        <div className="sneakersWrapper">
-          <ul>
-           {
-            sneakers.map((item) => 
-              <Card
-                key={item.id}
-                product={item}
-                changeCart={changeCart}
+        <Cart 
+          cartView={cartView}
+          setCartView={setCartView}
+          addSneakers={cartSneakers}
+          deleteCart={deleteCart}
+        />
+        <Header 
+          clickCart = {overlayView}
+        />
+        <main>
+          {/* <img src="/img/banner.png" className="banners" alt="banner 1" /> */}
+          <div className="containerTitle">
+            <h1>Все кроссовки</h1>
+            <div className="searchContainer">
+              <img
+                src="/img/search.svg"
+                className="searchIcon"
+                alt="icon search"
               />
-            )}
-          </ul>
-        </div>
-      </main>
+              <input className="search" placeholder="Поиск..."></input>
+            </div>
+          </div>
+          <div className="sneakersWrapper">
+            <ul>
+            {
+              sneakers.map((item) => 
+                <Card
+                  key={item.id}
+                  product={item}
+                  addingCart={addingCart}
+                  deleteCart={deleteCart}
+                />
+              )}
+            </ul>
+          </div>
+        </main>
+      
     </div>
   );
 }

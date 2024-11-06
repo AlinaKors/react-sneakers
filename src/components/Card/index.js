@@ -1,16 +1,15 @@
 import styles from './Card.module.scss';
 import { useState } from 'react';
 
-export default function Card({product, changeCart}) {
-  const [addFavorite, setFavorite] = useState(false);
-  const [addProduct, setAddProduct] = useState(false);
+export default function Card({product, addingCart, deleteCart}) {
+const [addFavorite, setFavorite] = useState(false);
 
   const changeFavorite = () => {
     setFavorite(!addFavorite);
   }
 
-  const changeAdding = () => {
-    setAddProduct(!addProduct);
+  const changeCart = (product) => {
+    product.isAdded ? deleteCart(product) : addingCart(product);
   }
 
     return(
@@ -34,12 +33,12 @@ export default function Card({product, changeCart}) {
                   <span>Цена:</span>
                   <strong>{product.price}</strong>
                 </div>
-                <button className={addProduct ? styles.addedCartBtn : ''} onClick={() => { changeAdding(); changeCart(product, addProduct)}}>
-                  <img
-                    src={addProduct ? "img/addedToCart.svg" : "img/addToCart.svg"}
-                    alt="add cart"
-                  />
-                </button>
+                  <button className={product.isAdded ? styles.addedCartBtn : ''} onClick={() => {changeCart(product)}}>
+                    <img
+                      src={product.isAdded ? "img/addedToCart.svg" : "img/addToCart.svg"}
+                      alt="add cart"
+                    />
+                  </button>
             </div>
         </li>
     );
