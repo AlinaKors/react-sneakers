@@ -2,6 +2,7 @@ import CartItem from '../CartItem';
 import styles from './Cart.module.scss';
 
 export default function Cart({cartView, setCartView, addSneakers, deleteCart}) {
+  
   const closeCart = () => {
     setCartView(false);
   }
@@ -41,7 +42,6 @@ export default function Cart({cartView, setCartView, addSneakers, deleteCart}) {
               Оформить заказ
               <img
                 src="/img/next.svg"
-                className="orderArrow"
                 alt="next arrow"
               />
             </a>
