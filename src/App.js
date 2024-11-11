@@ -36,13 +36,19 @@ const deleteCart = (deleteSneakers) => {
 }
 
 const searchSneakers = (e) => {
-  (e.target.value !== '') ? 
+  const value = e.target.value;
+  const regex = new RegExp(value, 'i');
+  (value !== '') ? 
   setSearch({isSearch: true,
-      text: e.target.value,
-      findSneakers: sneakers.filter(product => product.title.match(e.target.value))})
-  :
+      text: value,
+      findSneakers: sneakers.filter(product => product.title.match(regex))})
+  : clearSearch();
+}
+
+const clearSearch = () => {
   setSearch({isSearch: false, text: '', findSneakers: []})
 }
+
 
 const checkEmpty = cartSneakers.length !== 0;
 
@@ -74,7 +80,8 @@ const checkEmpty = cartSneakers.length !== 0;
                 className="searchIcon"
                 alt="icon search"
               />
-              <input className="search" placeholder="Поиск..." onChange={searchSneakers}></input>
+              {search.isSearch && <img src="/img/close.svg" className="clearInput" alt="cleat input" onClick={clearSearch}></img>}
+              <input className="search" placeholder="Поиск..." onChange={searchSneakers} value={search.text}></input>
             </div>
           </div>
           <div className="sneakersWrapper">

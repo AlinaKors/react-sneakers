@@ -44,9 +44,13 @@ main{
       border: 1px solid #F3F3F3;
       border-radius: 10px;
       padding: 0 15px;
-      img{
-        top: 15px;
-        left: 18px;
+      position: relative;
+
+      .clearInput {
+        top: 20px;
+        right: 18px;
+        position: absolute;
+        cursor: pointer;
       }
 
       input{
