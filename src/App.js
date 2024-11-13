@@ -51,6 +51,8 @@ const clearSearch = () => {
 
 
 const checkEmpty = cartSneakers.length !== 0;
+const totalPrice = !checkEmpty ? 0 :
+ cartSneakers.reduce((accumulator, product) => accumulator + parseInt(product.price), 0);
 
   return (
     <div className="wrapper">
@@ -60,12 +62,14 @@ const checkEmpty = cartSneakers.length !== 0;
           setCartView={setCartView}
           addSneakers={cartSneakers}
           deleteCart={deleteCart}
+          totalPrice={totalPrice}
         /> : <CartEmpty
           cartView={cartView}
           setCartView={setCartView}
         />}
         <Header 
           clickCart = {overlayView}
+          totalPrice = {totalPrice}
         />
         <main>
           {/* <img src="/img/banner.png" className="banners" alt="banner 1" /> */}

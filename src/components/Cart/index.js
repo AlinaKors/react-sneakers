@@ -1,11 +1,13 @@
 import CartItem from '../CartItem';
 import styles from './Cart.module.scss';
 
-export default function Cart({cartView, setCartView, addSneakers, deleteCart}) {
+export default function Cart({cartView, setCartView, addSneakers, deleteCart, totalPrice}) {
   
   const closeCart = () => {
     setCartView(false);
   }
+
+  const charge = totalPrice * 5 / 100;
 
     return(
         <div className={cartView ? "overlay" : "overlay overlayHidden"}>
@@ -28,15 +30,15 @@ export default function Cart({cartView, setCartView, addSneakers, deleteCart}) {
             />)}
           </ul>
           <div className={styles.cartTotal}>
-            <div className={styles.total}>
-              <span>Итого:</span>
-              <div></div>
-              <strong>21 498 руб.</strong>
-            </div>
             <div className={styles.charge}>
               <span>Налог 5%:</span>
               <div></div>
-              <strong>1074 руб.</strong>
+              <strong>{parseInt(charge).toLocaleString('ru-RU')} руб.</strong>
+            </div>
+            <div className={styles.total}>
+              <span>Итого:</span>
+              <div></div>
+              <strong>{parseInt(charge + totalPrice).toLocaleString('ru-RU')} руб.</strong>
             </div>
             <a>
               Оформить заказ
