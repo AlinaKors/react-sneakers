@@ -31,7 +31,7 @@ const [addFavorite, setFavorite] = useState(false);
               <div className={styles.addCartContainer}>
                 <div className={styles.price}>
                   <span>Цена:</span>
-                  <strong>{parseInt(product.price).toLocaleString('ru-RU')} руб.</strong>
+                  <strong>{product.price.toLocaleString('ru-RU')} руб.</strong>
                 </div>
                   <button className={product.isAdded ? styles.addedCartBtn : ''} onClick={() => {changeCart(product)}}>
                     <img

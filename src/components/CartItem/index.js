@@ -10,7 +10,7 @@ export default function CartItem({product, deleteCart}) {
               <div className={styles.descriptionItem}>
                 <p>{product.title}</p>
                 <div className={styles.price}>
-                  <strong>{parseInt(product.price).toLocaleString('ru-RU')} руб.</strong>
+                  <strong>{product.price.toLocaleString('ru-RU')} руб.</strong>
                   <img
                     src="/img/deletecart.svg"
                     className="deleteIcon"

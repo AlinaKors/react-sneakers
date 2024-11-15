@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Header from './components/Header';
 import Cart from './components/Cart';
 import Card from './components/Card';
@@ -7,12 +8,16 @@ import CartEmpty from './components/CartEmpty';
 function App() {
 const [cartView, setCartView] = useState(false);
 const [sneakers, setSneakers] = useState([]); 
-const [cartSneakers, setCartSneakers] = useState([]);
+const [addSneakers, setAddSneakers] = useState([]); 
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
 
-useEffect(() => {fetch('https://66b4e09a9f9169621ea4b1d9.mockapi.io/products')
-.then(res => res.json())
-.then(rezult => setSneakers(rezult))}, []);
+useEffect(() => {axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
+.then(res => setSneakers(res.data))}, []);
+
+useEffect(() => {axios.get('https://ff4d43b0c6975608.mokky.dev/addedCart')
+  .then(res => setAddSneakers(res.data))}, []);
+
+// useEffect(() => reloadPage());
 
 const overlayView = () => {
   setCartView(true);
@@ -26,13 +31,13 @@ const updateStatus = (id) => {
 } 
 
 const addingCart = (newSneakers) => {
-  setCartSneakers([...cartSneakers, newSneakers]);
   updateStatus(newSneakers.id);
+  axios.post('https://ff4d43b0c6975608.mokky.dev/addedCart', {...newSneakers, id: newSneakers.id - 1});
 }
 
 const deleteCart = (deleteSneakers) => {
-  setCartSneakers(cartSneakers.filter(product => product.id !== deleteSneakers.id));
   updateStatus(deleteSneakers.id);
+  axios.delete(`https://ff4d43b0c6975608.mokky.dev/addedCart/${deleteSneakers.id}`);
 }
 
 const searchSneakers = (e) => {
@@ -49,10 +54,23 @@ const clearSearch = () => {
   setSearch({isSearch: false, text: '', findSneakers: []})
 }
 
+const countTotal = () => {
+  let totalPrice;
+  const sneakersAdd = sneakers.filter(product => product.isAdded);
+  totalPrice = sneakersAdd.reduce((accumulator, product) => accumulator + product.price, 0);
+  return totalPrice;
+}
 
-const checkEmpty = cartSneakers.length !== 0;
-const totalPrice = !checkEmpty ? 0 :
- cartSneakers.reduce((accumulator, product) => accumulator + parseInt(product.price), 0);
+// const reloadPage = () => {
+//   const newSneakers = [...sneakers];
+//   addSneakers.map(item => newSneakers.filter(product => product.id === item.id).isAdded = true);
+//   setSneakers(newSneakers);
+// }
+
+const checkEmpty = sneakers.find(product => product.isAdded);
+const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
+const totalPrice = checkEmpty ? countTotal() : 0;
+
 
   return (
     <div className="wrapper">
@@ -60,7 +78,7 @@ const totalPrice = !checkEmpty ? 0 :
          <Cart 
           cartView={cartView}
           setCartView={setCartView}
-          addSneakers={cartSneakers}
+          addSneakers={sneakers}
           deleteCart={deleteCart}
           totalPrice={totalPrice}
         /> : <CartEmpty
@@ -91,20 +109,13 @@ const totalPrice = !checkEmpty ? 0 :
           <div className="sneakersWrapper">
             <ul>
             {
-              search.isSearch ? search.findSneakers.map((item) => 
+              sneakersCard.map((item) => 
                 <Card
                   key={item.id}
                   product={item}
                   addingCart={addingCart}
                   deleteCart={deleteCart}
                 />) 
-                : sneakers.map((item) => 
-                <Card
-                  key={item.id}
-                  product={item}
-                  addingCart={addingCart}
-                  deleteCart={deleteCart}
-                />)
               }
             </ul>
           </div>

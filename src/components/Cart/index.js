@@ -22,7 +22,7 @@ export default function Cart({cartView, setCartView, addSneakers, deleteCart, to
             ></img>
           </div>
           <ul>
-            {addSneakers.map((item) => 
+            {addSneakers.map((item) => item.isAdded &&
             <CartItem 
             key={item.id}
             product={item}
