@@ -3,41 +3,55 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import Card from './components/Card';
 import { useState, useEffect } from 'react';
-import CartEmpty from './components/CartEmpty';
 
 function App() {
 const [cartView, setCartView] = useState(false);
 const [sneakers, setSneakers] = useState([]); 
-const [addSneakers, setAddSneakers] = useState([]); 
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
+
+const checkEmpty = !sneakers.includes(product => product.isAdded);
+const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
+const totalPrice = checkEmpty ? countTotal() : 0;
 
 useEffect(() => {axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
 .then(res => setSneakers(res.data))}, []);
 
-useEffect(() => {axios.get('https://ff4d43b0c6975608.mokky.dev/addedCart')
-  .then(res => setAddSneakers(res.data))}, []);
-
-// useEffect(() => reloadPage());
+function countTotal ()  {
+  let totalPrice;
+  const sneakersAdd = sneakers.filter(product => product.isAdded);
+  totalPrice = sneakersAdd.reduce((accumulator, product) => accumulator + product.price, 0);
+  return totalPrice;
+} 
 
 const overlayView = () => {
   setCartView(true);
 }
 
-const updateStatus = (id) => {
+const updateStatus = (id, property) => {
   const newSneakers = [...sneakers];
   const product = newSneakers.find(item => item.id === id);
-  product.isAdded = !product.isAdded;
+  product[property] = !product[property];
   setSneakers(newSneakers);
 } 
 
 const addingCart = (newSneakers) => {
-  updateStatus(newSneakers.id);
-  axios.post('https://ff4d43b0c6975608.mokky.dev/addedCart', {...newSneakers, id: newSneakers.id - 1});
+  updateStatus(newSneakers.id, "isAdded");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isAdded: true});
 }
 
 const deleteCart = (deleteSneakers) => {
-  updateStatus(deleteSneakers.id);
-  axios.delete(`https://ff4d43b0c6975608.mokky.dev/addedCart/${deleteSneakers.id}`);
+  updateStatus(deleteSneakers.id, "isAdded");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isAdded: false});
+}
+
+const likeProduct = (newSneakers) => {
+  updateStatus(newSneakers.id, "isFavourite");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isFavourite: true});
+}
+
+const dislikeProduct = (deleteSneakers) => {
+  updateStatus(deleteSneakers.id, "isFavourite");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isFavourite: false});
 }
 
 const searchSneakers = (e) => {
@@ -54,37 +68,16 @@ const clearSearch = () => {
   setSearch({isSearch: false, text: '', findSneakers: []})
 }
 
-const countTotal = () => {
-  let totalPrice;
-  const sneakersAdd = sneakers.filter(product => product.isAdded);
-  totalPrice = sneakersAdd.reduce((accumulator, product) => accumulator + product.price, 0);
-  return totalPrice;
-}
-
-// const reloadPage = () => {
-//   const newSneakers = [...sneakers];
-//   addSneakers.map(item => newSneakers.filter(product => product.id === item.id).isAdded = true);
-//   setSneakers(newSneakers);
-// }
-
-const checkEmpty = sneakers.find(product => product.isAdded);
-const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
-const totalPrice = checkEmpty ? countTotal() : 0;
-
-
   return (
-    <div className="wrapper">
-        {checkEmpty ?         
+    <div className="wrapper">     
          <Cart 
           cartView={cartView}
           setCartView={setCartView}
           addSneakers={sneakers}
-          deleteCart={deleteCart}
+          onDeleteCart={deleteCart}
           totalPrice={totalPrice}
-        /> : <CartEmpty
-          cartView={cartView}
-          setCartView={setCartView}
-        />}
+          checkEmpty={checkEmpty}
+        />
         <Header 
           clickCart = {overlayView}
           totalPrice = {totalPrice}
@@ -113,8 +106,10 @@ const totalPrice = checkEmpty ? countTotal() : 0;
                 <Card
                   key={item.id}
                   product={item}
-                  addingCart={addingCart}
-                  deleteCart={deleteCart}
+                  onAddToCart={addingCart}
+                  onDeleteCart={deleteCart}
+                  onLikeProduct={likeProduct}
+                  onDislikeProduct={dislikeProduct}
                 />) 
               }
             </ul>

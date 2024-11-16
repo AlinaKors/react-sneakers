@@ -1,21 +1,19 @@
 import styles from './Card.module.scss';
-import { useState } from 'react';
 
-export default function Card({product, addingCart, deleteCart}) {
-const [addFavorite, setFavorite] = useState(false);
+export default function Card({product, onAddToCart, onDeleteCart, onLikeProduct, onDislikeProduct}) {
 
   const changeFavorite = () => {
-    setFavorite(!addFavorite);
+    product.isFavourite ? onDislikeProduct(product) : onLikeProduct(product);
   }
 
   const changeCart = (product) => {
-    product.isAdded ? deleteCart(product) : addingCart(product);
+    product.isAdded ? onDeleteCart(product) : onAddToCart(product);
   }
 
     return(
         <li className={styles.card}>
             <img
-                src={addFavorite ? "/img/addingFavorite.svg" : "/img/favorite.svg"}
+                src={product.isFavourite ? "/img/addingFavorite.svg" : "/img/favorite.svg"}
                 className={styles.favoriteIcon}
                 alt="favorite icon"
                 onClick={changeFavorite}
