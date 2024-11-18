@@ -9,7 +9,7 @@ const [cartView, setCartView] = useState(false);
 const [sneakers, setSneakers] = useState([]); 
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
 
-const checkEmpty = !sneakers.includes(product => product.isAdded);
+const checkEmpty = sneakers.some(product => product.isAdded);
 const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
 const totalPrice = checkEmpty ? countTotal() : 0;
 

@@ -14,21 +14,20 @@ export default function Cart({
   };
 
   const charge = (totalPrice * 5) / 100;
-  console.log(checkEmpty);
 
   return (
     <div className={cartView ? "overlay" : "overlay overlayHidden"}>
       <div className={styles.cartContainer}>
         <div className={styles.cartTitle}>
           <span>Корзина</span>
-          {!checkEmpty && <img
+          {checkEmpty && <img
             src="/img/close.svg"
             className="closeIcon"
             alt="close cart"
             onClick={closeCart}
           ></img>}
         </div>
-        { checkEmpty ? (
+        { !checkEmpty ? (
           <div className={styles.centerBlock}>
             <img src="/img/emptyCart.png" alt="Пустая корзина/empty cart"></img>
             <span>Корзина пустая</span>
