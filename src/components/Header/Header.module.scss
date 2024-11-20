@@ -3,6 +3,10 @@ header {
     justify-content: space-between;
     padding: 44px 60px;
     border-bottom: 1px solid #EAEAEA;
+
+    a{
+        text-decoration: none;
+    }
   
     .headerLeft {
         display: flex;

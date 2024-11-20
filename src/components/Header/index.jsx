@@ -1,47 +1,50 @@
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 export default function Header({clickCart, totalPrice}) {
     return(
         <header>
-        <div className={styles.headerLeft}>
-          <img
-            height="40"
-            width="40"
-            src="/img/logo.png"
-            alt="logo shop"
-          />
-          <div>
-            <span>React Sneakers</span>
-            <p>Магазин лучших кроссовок</p>
-          </div>
-        </div>
+          <Link to='/' >
+            <div className={styles.headerLeft}>
+              <img
+                height="40"
+                width="40"
+                src="/img/logo.png"
+                alt="logo shop"
+              />
+              <div>
+                <span>React Sneakers</span>
+                <p>Магазин лучших кроссовок</p>
+              </div>
+            </div>
+          </ Link>  
         <nav>
           <ul>
             <li className={styles.cart} onClick={clickCart}>
-              <a href="#">
+              <Link to='/cart'>
                 <img src="/img/cart.svg" className="cartIcon" alt="icon cart" />
                 <span>{totalPrice} руб.</span>
-              </a>
+              </Link>
             </li>
             <li className="bookmarks">
-              <a>
+              <Link to='/favourites'>
                 <img
                   src="/img/bookmarks.svg"
                   className="bookmarksIcon"
                   alt="icon bookmarks"
                 />
                 <span>Закладки</span>
-              </a>
+              </Link>
             </li>
             <li className="profile">
-              <a>
+              <Link to='/profile'>
                 <img
                   src="/img/profile.svg"
                   className="profileIcon"
                   alt="icon profile"
                 />
                 <span>Профиль</span>
-              </a>
+              </ Link>
             </li>
           </ul>
         </nav>

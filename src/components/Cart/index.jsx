@@ -9,6 +9,7 @@ export default function Cart({
   totalPrice,
   checkEmpty
 }) {
+  
   const closeCart = () => {
     setCartView(false);
   };
