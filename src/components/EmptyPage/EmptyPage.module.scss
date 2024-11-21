@@ -1,0 +1,54 @@
+.emptyContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 300px);
+    h2{
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 29.05px;
+        text-align: center;
+    }
+    span{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.36px;
+        text-align: center;    
+    }
+
+    button{
+        width: 100%;
+        padding: 18px 0px;
+        border-radius: 18px;
+        background-color: #9dd458;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.36px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        margin-top: 40px;
+        border: none;
+        min-width: 245px;
+  
+        &:hover {
+            opacity: 0.9;
+      
+            img {
+              transform: translateX(-4px) rotate(180deg);
+              transition: transform .2s ease;
+            }
+        }
+  
+        img {
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            top: 22px;
+            left: 32px;
+            transform: rotate(180deg);
+        }
+    }
+}

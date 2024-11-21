@@ -21,10 +21,10 @@ export default function Header({clickCart, totalPrice}) {
         <nav>
           <ul>
             <li className={styles.cart} onClick={clickCart}>
-              <Link to='/cart'>
+              <a>
                 <img src="/img/cart.svg" className="cartIcon" alt="icon cart" />
                 <span>{totalPrice} руб.</span>
-              </Link>
+              </a>
             </li>
             <li className="bookmarks">
               <Link to='/favourites'>
@@ -43,7 +43,7 @@ export default function Header({clickCart, totalPrice}) {
                   className="profileIcon"
                   alt="icon profile"
                 />
-                <span>Профиль</span>
+                <span>Покупки</span>
               </ Link>
             </li>
           </ul>

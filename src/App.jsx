@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Cart from './components/Cart';
-import Products from './components/Products';
-import Favourites from './components/Favourites';
+import Home from './pages/Home';
+import Favourites from './pages/Favourites';
 
 function App() {
 const [cartView, setCartView] = useState(false);
@@ -34,6 +34,21 @@ const updateStatus = (id, property) => {
   setSneakers(newSneakers);
 } 
 
+const addingCart = (newSneakers) => {
+  updateStatus(newSneakers.id, "isAdded");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isAdded: true});
+}
+
+const likeProduct = (newSneakers) => {
+  updateStatus(newSneakers.id, "isFavourite");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isFavourite: true});
+}
+
+const dislikeProduct = (deleteSneakers) => {
+  updateStatus(deleteSneakers.id, "isFavourite");
+  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isFavourite: false});
+}
+
 const deleteCart = (deleteSneakers) => {
   updateStatus(deleteSneakers.id, "isAdded");
   axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isAdded: false});
@@ -42,7 +57,7 @@ const deleteCart = (deleteSneakers) => {
   return ( 
     
       <div className="wrapper">     
-      <Cart 
+        <Cart 
           cartView={cartView}
           setCartView={setCartView}
           addSneakers={sneakers}
@@ -55,18 +70,23 @@ const deleteCart = (deleteSneakers) => {
           totalPrice = {totalPrice}
         />
         <Routes>
-          <Route path='/' element={        
-            <Products
+          <Route path='/' element={  
+            <Home
             sneakers={sneakers}
-            updateStatus={updateStatus}
             deleteCart={deleteCart}
+            addingCart={addingCart}
+            likeProduct={likeProduct}
+            dislikeProduct={dislikeProduct}
           />}/>
           <Route path='/favourites' element={        
             <Favourites
             sneakers={sneakers}
-            updateStatus={updateStatus}
             deleteCart={deleteCart}
+            addingCart={addingCart}
+            likeProduct={likeProduct}
+            dislikeProduct={dislikeProduct}
           />}/>
+          <Route path='/'></Route>
         </Routes>
       </div> 
   );
