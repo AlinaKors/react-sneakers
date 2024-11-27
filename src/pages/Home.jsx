@@ -6,7 +6,8 @@ export default function Home({
   deleteCart, 
   addingCart,  
   likeProduct,
-  dislikeProduct}) {
+  dislikeProduct,
+  isLoading}) {
     
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
 const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
@@ -25,7 +26,7 @@ const clearSearch = () => {
     setSearch({isSearch: false, text: '', findSneakers: []})
 }
 
-
+const checkLoading = isLoading ? sneakersCard : [...Array(10)];
 
     return(
         <main>
@@ -48,14 +49,15 @@ const clearSearch = () => {
         <div className='sneakersWrapper'>
           <ul>
           {
-            sneakersCard.map((item) => 
+            checkLoading.map((item, index) => 
               <Card
-                key={item.id}
+                key={isLoading ? item.id : index}
                 product={item}
                 onAddToCart={addingCart}
                 onDeleteCart={deleteCart}
                 onLikeProduct={likeProduct}
                 onDislikeProduct={dislikeProduct}
+                isLoading={isLoading}
               />) 
             }
           </ul>

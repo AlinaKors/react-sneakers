@@ -9,12 +9,19 @@ import Favourites from './pages/Favourites';
 function App() {
 const [cartView, setCartView] = useState(false);
 const [sneakers, setSneakers] = useState([]); 
+const [isLoading, setIsLoading] = useState(false);
 
 const checkEmpty = sneakers.some(product => product.isAdded);
 const totalPrice = checkEmpty ? countTotal() : 0;
 
-useEffect(() => {axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
-.then(res => setSneakers(res.data))}, []);
+useEffect(() => {
+  async function fetchData () {
+    const {data} = await axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
+    setSneakers(data)
+    setIsLoading(true);
+  }
+  fetchData();
+}, []);
 
 function countTotal ()  {
   let totalPrice;
@@ -77,6 +84,7 @@ const deleteCart = (deleteSneakers) => {
             addingCart={addingCart}
             likeProduct={likeProduct}
             dislikeProduct={dislikeProduct}
+            isLoading={isLoading}
           />}/>
           <Route path='/favourites' element={        
             <Favourites
@@ -85,6 +93,7 @@ const deleteCart = (deleteSneakers) => {
             addingCart={addingCart}
             likeProduct={likeProduct}
             dislikeProduct={dislikeProduct}
+            isLoading={isLoading}
           />}/>
           <Route path='/'></Route>
         </Routes>

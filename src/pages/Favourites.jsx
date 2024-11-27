@@ -7,9 +7,11 @@ export default function Favourites({
     deleteCart,
     addingCart,
     likeProduct,
-    dislikeProduct}) {
+    dislikeProduct,
+    isLoading}) {
 
-    const sneakersFavourites = sneakers.filter(product => product.isFavourite)
+    const sneakersFavourites = sneakers.filter(product => product.isFavourite);
+
     return( 
         sneakersFavourites.length > 0 ? <div className='favourites'>
             <div className='containerTitle'>
@@ -28,6 +30,7 @@ export default function Favourites({
                         onDeleteCart={deleteCart}
                         onLikeProduct={likeProduct}
                         onDislikeProduct={dislikeProduct}
+                        isLoading={isLoading}
                     />) 
                     }
                 </ul>
