@@ -1,15 +1,17 @@
 import CartItem from "../CartItem";
 import styles from "./Cart.module.scss";
+import { useContext } from 'react';
+import SneakersContext from '../../context';
+
 
 export default function Cart({
   cartView,
   setCartView,
-  addSneakers,
-  onDeleteCart,
-  totalPrice,
   checkEmpty
 }) {
   
+  const {sneakers, deleteCart, totalPrice} = useContext(SneakersContext);
+
   const closeCart = () => {
     setCartView(false);
   };
@@ -41,13 +43,13 @@ export default function Cart({
         ) : (
           <div className={styles.cartBlock}>
             <ul>
-              {addSneakers.map(
+              {sneakers.map(
                 (item) =>
                   item.isAdded && (
                     <CartItem
                       key={item.id}
                       product={item}
-                      deleteCart={onDeleteCart}
+                      deleteCart={deleteCart}
                     />
                   )
               )}

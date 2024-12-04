@@ -1,13 +1,10 @@
 import Card from '../components/Card';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import SneakersContext from '../context';
 
-export default function Home({
-  sneakers,
-  deleteCart, 
-  addingCart,  
-  likeProduct,
-  dislikeProduct,
-  isLoading}) {
+export default function Home({isLoading}) {
+
+const {sneakers, deleteCart, addingCart, likeProduct, dislikeProduct} = useContext(SneakersContext);
     
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
 const sneakersCard = search.isSearch ? search.findSneakers : sneakers;

@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import EmptyPage from '../components/EmptyPage';
+import { useContext } from 'react';
+import SneakersContext from '../context';
 
-export default function Favourites({
-    sneakers, 
-    deleteCart,
-    addingCart,
-    likeProduct,
-    dislikeProduct,
-    isLoading}) {
+export default function Favourites({isLoading}) {
 
+    const {sneakers, deleteCart, addingCart, likeProduct, dislikeProduct} = useContext(SneakersContext);
     const sneakersFavourites = sneakers.filter(product => product.isFavourite);
 
     return( 

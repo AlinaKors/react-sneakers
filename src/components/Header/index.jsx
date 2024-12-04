@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { useContext } from 'react';
+import SneakersContext from '../../context';
 
-export default function Header({clickCart, totalPrice}) {
+export default function Header({clickCart}) {
+  const {totalPrice} = useContext(SneakersContext);
     return(
         <header>
           <Link to='/' >

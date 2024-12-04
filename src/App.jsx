@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favourites from './pages/Favourites';
+import SneakersContext from './context';
 
 function App() {
 const [cartView, setCartView] = useState(false);
@@ -62,42 +63,35 @@ const deleteCart = (deleteSneakers) => {
 }
 
   return ( 
+    <SneakersContext.Provider value={{sneakers, 
     
+    deleteCart, 
+    addingCart, 
+    likeProduct, 
+    dislikeProduct,
+    totalPrice,}}>
       <div className="wrapper">     
         <Cart 
           cartView={cartView}
           setCartView={setCartView}
-          addSneakers={sneakers}
-          onDeleteCart={deleteCart}
-          totalPrice={totalPrice}
           checkEmpty={checkEmpty}
         />
         <Header 
           clickCart = {overlayView}
-          totalPrice = {totalPrice}
         />
         <Routes>
           <Route path='/' element={  
             <Home
-            sneakers={sneakers}
-            deleteCart={deleteCart}
-            addingCart={addingCart}
-            likeProduct={likeProduct}
-            dislikeProduct={dislikeProduct}
             isLoading={isLoading}
           />}/>
           <Route path='/favourites' element={        
             <Favourites
-            sneakers={sneakers}
-            deleteCart={deleteCart}
-            addingCart={addingCart}
-            likeProduct={likeProduct}
-            dislikeProduct={dislikeProduct}
             isLoading={isLoading}
           />}/>
           <Route path='/'></Route>
         </Routes>
       </div> 
+    </SneakersContext.Provider>
   );
 }
 
