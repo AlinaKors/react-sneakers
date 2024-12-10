@@ -1,6 +1,6 @@
 import CartItem from "../CartItem";
 import styles from "./Cart.module.scss";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import SneakersContext from '../../context';
 
 
@@ -16,7 +16,10 @@ export default function Cart({
     setCartView(false);
   };
 
-  const charge = (totalPrice * 5) / 100;
+  const [isComplete, setIsComplete] = useState(false);
+
+  const charge = (totalPrice * 5) / 100; 
+  console.log(isComplete);
 
   return (
     <div className={cartView ? "overlay" : "overlay overlayHidden"}>
@@ -32,16 +35,26 @@ export default function Cart({
         </div>
         { !checkEmpty ? (
           <div className={styles.centerBlock}>
-            <img src="/img/emptyCart.png" alt="Пустая корзина/empty cart"></img>
+            <img src="/img/emptyCart.png" alt="Пустая корзина"></img>
             <span>Корзина пустая</span>
             <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-            <button className="btnBack" onClick={closeCart}>
+            <button className={styles.btnBack} onClick={closeCart}>
               Вернуться назад
               <img src="/img/next.svg" alt="back arrow" />
             </button>
           </div>
         ) : (
-          <div className={styles.cartBlock}>
+          isComplete ?           
+          (<div className={styles.centerBlock}>
+          <img src="/img/completeOrder.png" alt="Заказ оформлен"></img>
+          <span>Заказ оформлен!</span>
+          <p>Ваш заказ #18 скоро будет передан курьерской доставке</p>
+          <button className={styles.btnBack} onClick={() => {closeCart(); setIsComplete(false);}}>
+            Вернуться назад
+            <img src="/img/next.svg" alt="back arrow" />
+          </button>
+        </div>) :
+          (<div className={styles.cartBlock}>
             <ul>
               {sneakers.map(
                 (item) =>
@@ -67,13 +80,13 @@ export default function Cart({
                   {parseInt(charge + totalPrice).toLocaleString("ru-RU")} руб.
                 </strong>
               </div>
-              <a>
+              <button className={styles.placeOrder} onClick={() => setIsComplete(true)}>
                 Оформить заказ
                 <img src="/img/next.svg" alt="next arrow" />
-              </a>
+              </button>
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

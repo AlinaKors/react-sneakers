@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favourites from './pages/Favourites';
+import Purchases from './pages/Purchases';
 import SneakersContext from './context';
 
 function App() {
@@ -43,28 +44,46 @@ const updateStatus = (id, property) => {
 } 
 
 const addingCart = (newSneakers) => {
-  updateStatus(newSneakers.id, "isAdded");
-  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isAdded: true});
+  try{
+    updateStatus(newSneakers.id, "isAdded");
+    axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isAdded: true});
+  }
+  catch(error){
+    console.log('Не удалось добавить продукт в корзину');
+  }
+  
 }
 
 const likeProduct = (newSneakers) => {
-  updateStatus(newSneakers.id, "isFavourite");
-  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isFavourite: true});
+  try {
+    updateStatus(newSneakers.id, "isFavourite");
+    axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isFavourite: true});
+  } catch (error) {
+    console.log('Не удалось добавить продукт в избранное');
+  }
 }
 
 const dislikeProduct = (deleteSneakers) => {
-  updateStatus(deleteSneakers.id, "isFavourite");
-  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isFavourite: false});
+  try {
+    updateStatus(deleteSneakers.id, "isFavourite");
+    axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isFavourite: false});
+  } catch (error) {
+    console.log('Не удалось удалить продукт из избранного');
+  }
+
 }
 
 const deleteCart = (deleteSneakers) => {
-  updateStatus(deleteSneakers.id, "isAdded");
-  axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isAdded: false});
+  try {
+    updateStatus(deleteSneakers.id, "isAdded");
+    axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isAdded: false});
+  } catch (error) {
+    console.log('Не удалось удалить продукт из корзины');
+  }
 }
 
   return ( 
-    <SneakersContext.Provider value={{sneakers, 
-    
+    <SneakersContext.Provider value={{sneakers,
     deleteCart, 
     addingCart, 
     likeProduct, 
@@ -88,7 +107,10 @@ const deleteCart = (deleteSneakers) => {
             <Favourites
             isLoading={isLoading}
           />}/>
-          <Route path='/'></Route>
+          <Route path='/purchases' element={        
+            <Purchases
+            isLoading={isLoading}
+          />}/>
         </Routes>
       </div> 
     </SneakersContext.Provider>

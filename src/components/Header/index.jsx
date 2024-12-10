@@ -40,7 +40,7 @@ export default function Header({clickCart}) {
               </Link>
             </li>
             <li className="profile">
-              <Link to='/profile'>
+              <Link to='/purchases'>
                 <img
                   src="/img/profile.svg"
                   className="profileIcon"
