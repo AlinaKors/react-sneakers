@@ -32,6 +32,10 @@ function countTotal ()  {
   return totalPrice;
 } 
 
+const closeCart = () => {
+  setCartView(false);
+};
+
 const overlayView = () => {
   setCartView(true);
 }
@@ -88,11 +92,11 @@ const deleteCart = (deleteSneakers) => {
     addingCart, 
     likeProduct, 
     dislikeProduct,
+    closeCart,
     totalPrice,}}>
       <div className="wrapper">     
         <Cart 
           cartView={cartView}
-          setCartView={setCartView}
           checkEmpty={checkEmpty}
         />
         <Header 

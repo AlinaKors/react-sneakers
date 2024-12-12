@@ -2,12 +2,14 @@ import Card from '../components/Card';
 import { useContext, useState } from 'react';
 import SneakersContext from '../context';
 
+
 export default function Home({isLoading}) {
 
 const {sneakers, deleteCart, addingCart, likeProduct, dislikeProduct} = useContext(SneakersContext);
     
 const [search, setSearch] = useState({isSearch: false, text: '', findSneakers: []});
 const sneakersCard = search.isSearch ? search.findSneakers : sneakers;
+
   
 const searchSneakers = (e) => {
     const value = e.target.value;
