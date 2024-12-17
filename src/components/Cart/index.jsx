@@ -11,16 +11,31 @@ export default function Cart({
 }) {
   
   const {sneakers, deleteCart, totalPrice, closeCart} = useContext(SneakersContext);
+  const [isComplete, setIsComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderId, setOrderIds] = useState();
 
   const sneakersAdded = sneakers.filter(product => product.isAdded);
 
-  const addOrders = () => {
-    setIsComplete(true)
-    axios.post(`https://ff4d43b0c6975608.mokky.dev/orders`, sneakersAdded);
-    sneakersAdded.map(product => deleteCart(product));
+  const addOrders = async  () => {
+    try{
+      setIsLoading(true);
+      setIsComplete(true);
+      const {data} = await axios.post(`https://ff4d43b0c6975608.mokky.dev/orders`, {
+        order: sneakersAdded,
+      });
+      setOrderIds(data.id);
+      sneakersAdded.map(product => deleteCart(product));
+    } catch {
+      console.log("Не удалось создать заказ :c")
+    }
+    setIsLoading(false);
   }
 
-  const [isComplete, setIsComplete] = useState(false);
+  const closeOrder = () => {
+    closeCart();
+    setTimeout(() => setIsComplete(false), 100);
+  }
 
   const charge = (totalPrice * 5) / 100; 
 
@@ -41,12 +56,14 @@ export default function Cart({
           title={'Корзина пустая'}
           description={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
           imgSrc={'/img/emptyCart.png'}
-          alt={'Пустая коробка'}/>) : (
+          alt={'Пустая коробка'}
+          closeCart={closeCart}/>) : (
           <Info 
           title={'Заказ оформлен!'}
-          description={'Ваш заказ #18 скоро будет передан курьерской доставке'}
+          description={`Ваш заказ #${orderId} скоро будет передан курьерской доставке`}
           imgSrc={'/img/completeOrder.png'}
-          alt={'Успешный заказ'}/>
+          alt={'Успешный заказ'}
+          closeCart={closeOrder}/>
         ) : ( 
           (<div className={styles.cartBlock}>
             <ul>
@@ -72,7 +89,7 @@ export default function Cart({
                   {parseInt(charge + totalPrice).toLocaleString("ru-RU")} руб.
                 </strong>
               </div>
-              <button className={styles.placeOrder} onClick={addOrders}>
+              <button disabled={isLoading} className={styles.placeOrder} onClick={addOrders}>
                 Оформить заказ
                 <img src="/img/next.svg" alt="next arrow" />
               </button>

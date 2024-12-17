@@ -107,6 +107,11 @@
     margin-bottom: 30px;
     border: none;
 
+    &:disabled{
+      background-color: #bebebe;
+      cursor: unset;
+    }
+
     &:hover {
       opacity: 0.9;
 
@@ -122,6 +127,7 @@
       right: 40px;
       transition: transform 0.1s ease;
     }
+    
   }
 }
 
