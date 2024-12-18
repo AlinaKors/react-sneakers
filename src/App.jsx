@@ -18,9 +18,15 @@ const totalPrice = checkEmpty ? countTotal() : 0;
 
 useEffect(() => {
   async function fetchData () {
-    const {data} = await axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
-    setSneakers(data)
-    setIsLoading(true);
+    try{
+      const {data} = await axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
+      setSneakers(data)
+      setTimeout(() => setIsLoading(true), 1000);
+    } catch(error) {
+      console.log("Ошибка при запросе данных");
+      console.error(error);
+    }
+
   }
   fetchData();
 }, []);
@@ -54,6 +60,7 @@ const addingCart = (newSneakers) => {
   }
   catch(error){
     console.log('Не удалось добавить продукт в корзину');
+    console.error(error);
   }
   
 }
@@ -64,6 +71,7 @@ const likeProduct = (newSneakers) => {
     axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${newSneakers.id}`, {isFavourite: true});
   } catch (error) {
     console.log('Не удалось добавить продукт в избранное');
+    console.error(error);
   }
 }
 
@@ -73,6 +81,7 @@ const dislikeProduct = (deleteSneakers) => {
     axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isFavourite: false});
   } catch (error) {
     console.log('Не удалось удалить продукт из избранного');
+    console.error(error);
   }
 
 }
@@ -83,6 +92,7 @@ const deleteCart = (deleteSneakers) => {
     axios.patch(`https://ff4d43b0c6975608.mokky.dev/sneakers/${deleteSneakers.id}`, {isAdded: false});
   } catch (error) {
     console.log('Не удалось удалить продукт из корзины');
+    console.error(error);
   }
 }
 

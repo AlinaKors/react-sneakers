@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import styles from "./Card.module.scss";
-import ContentLoader from "react-content-loader";
-import Skeleton from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 export default function Card({
@@ -61,22 +61,15 @@ export default function Card({
           </div>
         </Fragment>
       ) : (
-        <Skeleton variant="rect" width={210} height={118} />
-        // <ContentLoader
-        //   speed={1}
-        //   width={150}
-        //   height={192}
-        //   viewBox="0 0 150 192"
-        //   backgroundColor="#f3f3f3"
-        //   foregroundColor="#ecebeb"
-        // >
-        //   <rect x="0" y="0" rx="10" ry="10" width="150" height="90" />
-        //   <rect x="36" y="39" rx="0" ry="0" width="1" height="0" />
-        //   <rect x="-1" y="106" rx="10" ry="10" width="150" height="15" />
-        //   <rect x="0" y="126" rx="10" ry="10" width="93" height="15" />
-        //   <rect x="0" y="164" rx="10" ry="10" width="80" height="24" />
-        //   <rect x="115" y="158" rx="10" ry="10" width="32" height="32" />
-        // </ContentLoader>
+        <Fragment>
+          <Skeleton variant="rect" width={150} height={90} />
+          <Skeleton variant="text" sx={{ fontSize: '14px' }} className={styles.skeletonBox}/>
+          <Skeleton variant="text" sx={{ fontSize: '11px' }} width={90}/>
+          <div className={styles.skeletonContainer}>
+            <Skeleton variant="rect"  width={80} height={24}/>
+            <Skeleton variant="rect"  width={32} height={32}/>
+          </div>
+        </Fragment>
       )}
     </li>
   );

@@ -26,8 +26,9 @@ export default function Cart({
       });
       setOrderIds(data.id);
       sneakersAdded.map(product => deleteCart(product));
-    } catch {
-      console.log("Не удалось создать заказ :c")
+    } catch(error) {
+      console.log("Не удалось создать заказ :c");
+      console.error(error);
     }
     setIsLoading(false);
   }
