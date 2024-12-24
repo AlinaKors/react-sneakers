@@ -2,15 +2,14 @@ import CartItem from "../CartItem";
 import styles from "./Cart.module.scss";
 import { useContext, useState } from 'react';
 import SneakersContext from '../../context';
+import {useCart} from '../../hooks/useCart';
 import axios from 'axios';
 import Info from '../Info';
 
-export default function Cart({
-  cartView,
-  checkEmpty
-}) {
+export default function Cart({cartView}) {
   
-  const {sneakers, deleteCart, totalPrice, closeCart} = useContext(SneakersContext);
+  const {deleteCart, closeCart} = useContext(SneakersContext);
+  const {sneakers, totalPrice, checkEmpty} = useCart();
   const [isComplete, setIsComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [orderId, setOrderIds] = useState();
@@ -35,7 +34,7 @@ export default function Cart({
 
   const closeOrder = () => {
     closeCart();
-    setTimeout(() => setIsComplete(false), 100);
+    setTimeout(() => setIsComplete(false), 1000);
   }
 
   const charge = (totalPrice * 5) / 100; 

@@ -39,7 +39,7 @@ export default function Card({
             className={styles.cardImg}
             alt={product.title}
           />
-          <h2>{product.title}</h2>
+          <h3>{product.title}</h3>
           <div className={styles.addCartContainer}>
             <div className={styles.price}>
               <span>Цена:</span>

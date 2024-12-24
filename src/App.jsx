@@ -13,9 +13,6 @@ const [cartView, setCartView] = useState(false);
 const [sneakers, setSneakers] = useState([]); 
 const [isLoading, setIsLoading] = useState(false);
 
-const checkEmpty = sneakers.some(product => product.isAdded);
-const totalPrice = checkEmpty ? countTotal() : 0;
-
 useEffect(() => {
   async function fetchData () {
     try{
@@ -30,13 +27,6 @@ useEffect(() => {
   }
   fetchData();
 }, []);
-
-function countTotal ()  {
-  let totalPrice;
-  const sneakersAdd = sneakers.filter(product => product.isAdded);
-  totalPrice = sneakersAdd.reduce((accumulator, product) => accumulator + product.price, 0);
-  return totalPrice;
-} 
 
 const closeCart = () => {
   setCartView(false);
@@ -102,12 +92,10 @@ const deleteCart = (deleteSneakers) => {
     addingCart, 
     likeProduct, 
     dislikeProduct,
-    closeCart,
-    totalPrice,}}>
+    closeCart}}>
       <div className="wrapper">     
         <Cart 
           cartView={cartView}
-          checkEmpty={checkEmpty}
         />
         <Header 
           clickCart = {overlayView}

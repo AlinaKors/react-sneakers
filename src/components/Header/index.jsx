@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
-import { useContext } from 'react';
-import SneakersContext from '../../context';
+import {useCart} from '../../hooks/useCart';
 
 export default function Header({clickCart}) {
-  const {totalPrice} = useContext(SneakersContext);
+  const {totalPrice} = useCart();
     return(
         <header>
           <Link to='/' >

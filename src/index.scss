@@ -108,6 +108,9 @@ main{
   }
 
   .sneakersWrapper{
+    display: flex;
+    flex-direction: column;
+
       ul{
         display: grid;
         grid-gap: 40px;
@@ -116,7 +119,7 @@ main{
     }
 }
 
-.favourites{
+.favourites, .orders{
   background-color: #FFFFFF;
   padding: 45px 60px;
   .containerTitle{
@@ -148,4 +151,15 @@ main{
           grid-template: auto / repeat(4, 1fr) ;
       }
   }
+}
+
+.orderName{
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.05px;
+  text-align: center;
+  text-align: left;
+  border-bottom: 1px solid #EAEAEA;
+  padding: 16px 0px;
+  margin: 8px 0px 32px;
 }
