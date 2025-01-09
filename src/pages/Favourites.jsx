@@ -6,7 +6,7 @@ import SneakersContext from '../context';
 
 export default function Favourites({isLoading}) {
 
-    const {sneakers, deleteCart, addingCart, likeProduct, dislikeProduct} = useContext(SneakersContext);
+    const {sneakers} = useContext(SneakersContext);
     const sneakersFavourites = sneakers.filter(product => product.isFavourite);
 
     return( 
@@ -23,10 +23,6 @@ export default function Favourites({isLoading}) {
                     <Card
                         key={item.id}
                         product={item}
-                        onAddToCart={addingCart}
-                        onDeleteCart={deleteCart}
-                        onLikeProduct={likeProduct}
-                        onDislikeProduct={dislikeProduct}
                         isLoading={isLoading}
                     />) 
                     }

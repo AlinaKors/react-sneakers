@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import EmptyPage from '../components/EmptyPage';
-import { Fragment, useContext, useEffect, useState } from 'react';
-import SneakersContext from '../context';
+import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Purchases () {
-    const {deleteCart, addingCart, likeProduct, dislikeProduct} = useContext(SneakersContext);
+
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -34,24 +33,21 @@ export default function Purchases () {
                 <h1>Мои покупки</h1>
             </div>
             <div className='sneakersWrapper'>
-                        <div className='orderName'>Заказ </div>             
-                        <ul>
-                            {orders.forEach(itemOrder => {
-
-                            (itemOrder.order).map((item) => 
-                            <Card
-                                key={item.id}
-                                product={item}
-                                onAddToCart={addingCart}
-                                onDeleteCart={deleteCart}
-                                onLikeProduct={likeProduct}
-                                onDislikeProduct={dislikeProduct}
-                                isLoading={isLoading}
-                            />) 
-                            })}
-                        </ul>
-            
-
+              {orders.map(itemOrder => {
+                return(
+                  <Fragment>
+                    <div className='orderName'>Заказ {itemOrder.id}</div> 
+                    <ul>
+                    {itemOrder.order.map((item) =>  
+                      <Card
+                      key={item.id}
+                      product={item}
+                      isLoading={isLoading}
+                      />)}
+                    </ul>
+                  </Fragment>
+                )
+              })}   
             </div>
         </div> :
         <EmptyPage />

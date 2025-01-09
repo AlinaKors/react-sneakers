@@ -2,22 +2,25 @@ import { Fragment } from "react";
 import styles from "./Card.module.scss";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useContext, useState, useEffect } from 'react';
+import SneakersContext from '../../context';
 
 
 export default function Card({
   product,
-  onAddToCart,
-  onDeleteCart,
-  onLikeProduct,
-  onDislikeProduct,
   isLoading,
 }) {
+
+  const page = window.location.pathname === '/purchases';
+
+  const {deleteCart, addingCart, dislikeProduct, likeProduct} = useContext(SneakersContext);
+
   const changeFavorite = () => {
-    product.isFavourite ? onDislikeProduct(product) : onLikeProduct(product);
+    product.isFavourite ? dislikeProduct(product) : likeProduct(product);
   };
 
   const changeCart = (product) => {
-    product.isAdded ? onDeleteCart(product) : onAddToCart(product);
+    product.isAdded ? deleteCart(product) : addingCart(product);
   };
 
   return (
@@ -30,7 +33,7 @@ export default function Card({
                 ? "/img/addingFavorite.svg"
                 : "/img/favorite.svg"
             }
-            className={styles.favoriteIcon}
+            className={page ? styles.none : styles.favoriteIcon}
             alt="favorite icon"
             onClick={changeFavorite}
           />
@@ -46,7 +49,7 @@ export default function Card({
               <strong>{product.price.toLocaleString("ru-RU")} руб.</strong>
             </div>
             <button
-              className={product.isAdded ? styles.addedCartBtn : ""}
+              className={page ? styles.none : product.isAdded ? styles.addedCartBtn : ""}
               onClick={() => {
                 changeCart(product);
               }}
