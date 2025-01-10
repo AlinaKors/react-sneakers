@@ -1,0 +1,35 @@
+.banner{
+    width: 960px;
+    border-radius: 20px;
+    height: 300px;
+}
+
+.mySwiper{
+    border-radius: 20px;
+    button{
+        background: white;
+        border-radius: 80px;
+        border: #C8C8C8 1.5px;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        width: 38px;
+        height: 38px;
+        cursor: pointer;
+        opacity: .9;
+        img{
+            width: 20px;
+            opacity: .3;
+        }
+        &:hover{
+            opacity: 1;
+        }
+    }
+    .prevSlider{
+        transform: rotate(180deg);
+    }
+    .nextSlider{
+        right: 0;
+    }
+}
+
