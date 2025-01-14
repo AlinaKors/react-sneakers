@@ -50,6 +50,6 @@ export default function Purchases () {
               })}   
             </div>
         </div> :
-        <EmptyPage />
+        isLoading && <EmptyPage />
     );
 }

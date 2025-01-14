@@ -1,5 +1,5 @@
 import Card from '../components/Card';
-import { Fragment, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import SneakersContext from '../context';
 import Slider from '../components/Slider';
 
