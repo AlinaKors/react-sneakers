@@ -8,7 +8,7 @@ const isFavouritePage = namePage.includes('favourites');
 
     return(
       <div className={styles.emptyContainer}>
-        <img src={isFavouritePage ? '/img/sadSmile.svg' : '/img/crySmile.svg'} alt='sad smile'></img>
+        <img src={isFavouritePage ? 'img/sadSmile.svg' : 'img/crySmile.svg'} alt='sad smile'></img>
         <div>
             <h2>{isFavouritePage ? 'Закладок нет :(' : 'У вас нет заказов'}</h2>
             <span>{isFavouritePage ? `Вы ничего не добавляли в закладки` : `Оформите хотя бы один заказ.`}</span>
@@ -16,7 +16,7 @@ const isFavouritePage = namePage.includes('favourites');
         <Link to='/' >
             <button className="btnBack">
               Вернуться назад
-              <img src="/img/next.svg" alt="back arrow" />
+              <img src="img/next.svg" alt="back arrow" />
             </button>
         </Link>
       </div>  

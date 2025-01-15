@@ -10,7 +10,7 @@ export default function Info ({title, description, imgSrc, alt, closeCart})  {
         <p>{description}</p>
         <button className={styles.btnBack} onClick={closeCart}>
         Вернуться назад
-        <img src="/img/next.svg" alt="back arrow" />
+        <img src="img/next.svg" alt="back arrow" />
         </button>
     </div>
   )

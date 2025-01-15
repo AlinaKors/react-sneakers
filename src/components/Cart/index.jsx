@@ -45,7 +45,7 @@ export default function Cart({cartView}) {
         <div className={styles.cartTitle}>
           <span>Корзина</span>
           {checkEmpty && <img
-            src="/img/close.svg"
+            src="img/close.svg"
             className="closeIcon"
             alt="close cart"
             onClick={closeCart}
@@ -55,13 +55,13 @@ export default function Cart({cartView}) {
           (<Info 
           title={'Корзина пустая'}
           description={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
-          imgSrc={'/img/emptyCart.png'}
+          imgSrc={'img/emptyCart.png'}
           alt={'Пустая коробка'}
           closeCart={closeCart}/>) : (
           <Info 
           title={'Заказ оформлен!'}
           description={`Ваш заказ #${orderId} скоро будет передан курьерской доставке`}
-          imgSrc={'/img/completeOrder.png'}
+          imgSrc={'img/completeOrder.png'}
           alt={'Успешный заказ'}
           closeCart={closeOrder}/>
         ) : ( 
@@ -91,7 +91,7 @@ export default function Cart({cartView}) {
               </div>
               <button disabled={isLoading} className={styles.placeOrder} onClick={addOrders}>
                 Оформить заказ
-                <img src="/img/next.svg" alt="next arrow" />
+                <img src="img/next.svg" alt="next arrow" />
               </button>
             </div>
           </div>

@@ -27,7 +27,7 @@ export default function Purchases () {
          <div className='orders'>
             <div className='containerTitle'>
                 <Link to='/'>
-                    <img src='/img/back.svg' alt="back"></img>
+                    <img src='img/back.svg' alt="back"></img>
                 </Link>
                 <h1>Мои покупки</h1>
             </div>

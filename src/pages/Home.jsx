@@ -41,13 +41,13 @@ const checkLoading = isLoading ? sneakersCard : [...Array(10)];
           )}
           <div className="searchContainer">
             <img
-              src="/img/search.svg"
+              src="img/search.svg"
               className="searchIcon"
               alt="icon search"
             />
             {search.isSearch && (
               <img
-                src="/img/close.svg"
+                src="img/close.svg"
                 className="clearInput"
                 alt="cleat input"
                 onClick={clearSearch}

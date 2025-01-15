@@ -13,7 +13,7 @@ export default function Favourites({isLoading}) {
         sneakersFavourites.length > 0 ? <div className='favourites'>
             <div className='containerTitle'>
                 <Link to='/'>
-                    <img src='/img/back.svg' alt="back"></img>
+                    <img src='img/back.svg' alt="back"></img>
                 </Link>
                 <h1>Мои закладки</h1>
             </div>

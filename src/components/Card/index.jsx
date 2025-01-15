@@ -30,8 +30,8 @@ export default function Card({
           <img
             src={
               product.isFavourite
-                ? "/img/addingFavorite.svg"
-                : "/img/favorite.svg"
+                ? "img/addingFavorite.svg"
+                : "img/favorite.svg"
             }
             className={page ? styles.none : styles.favoriteIcon}
             alt="favorite icon"
