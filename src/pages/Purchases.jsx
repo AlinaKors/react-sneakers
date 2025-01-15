@@ -10,7 +10,7 @@ export default function Purchases () {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        async function fetchData () {
+        (async() =>  {
           try{
             const {data} = await axios.get('https://ff4d43b0c6975608.mokky.dev/orders');
             setOrders(data);
@@ -19,8 +19,7 @@ export default function Purchases () {
             console.log("Ошибка при запросе данных");
             console.error(error);
           }
-        }
-        fetchData();
+        })();
       }, []);
 
     return( 

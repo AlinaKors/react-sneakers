@@ -14,7 +14,7 @@ const [sneakers, setSneakers] = useState([]);
 const [isLoading, setIsLoading] = useState(false);
 
 useEffect(() => {
-  async function fetchData () {
+  (async () =>  {
     try{
       const {data} = await axios.get('https://ff4d43b0c6975608.mokky.dev/sneakers')
       setSneakers(data)
@@ -24,8 +24,7 @@ useEffect(() => {
       console.error(error);
     }
 
-  }
-  fetchData();
+  })();
 }, []);
 
 const closeCart = () => {
