@@ -104,11 +104,11 @@ const deleteCart = (deleteSneakers) => {
             <Home
             isLoading={isLoading}
           />}/>
-          <Route path='/favourites' element={        
+          <Route path='favourites' element={        
             <Favourites
             isLoading={isLoading}
           />}/>
-          <Route path='/purchases' element={        
+          <Route path='purchases' element={        
             <Purchases
             isLoading={isLoading}
           />}/>

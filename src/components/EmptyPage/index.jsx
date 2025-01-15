@@ -13,7 +13,7 @@ const isFavouritePage = namePage.includes('favourites');
             <h2>{isFavouritePage ? 'Закладок нет :(' : 'У вас нет заказов'}</h2>
             <span>{isFavouritePage ? `Вы ничего не добавляли в закладки` : `Оформите хотя бы один заказ.`}</span>
         </div>
-        <Link to='/' >
+        <Link to='/'>
             <button className="btnBack">
               Вернуться назад
               <img src="img/next.svg" alt="back arrow" />

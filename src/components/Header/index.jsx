@@ -6,7 +6,7 @@ export default function Header({clickCart}) {
   const {totalPrice} = useCart();
     return(
         <header>
-          <Link to='/' >
+          <Link to='/'>
             <div className={styles.headerLeft}>
               <img
                 height="40"
@@ -29,7 +29,7 @@ export default function Header({clickCart}) {
               </a>
             </li>
             <li className="bookmarks">
-              <Link to='/favourites'>
+              <Link to='favourites'>
                 <img
                   src="img/bookmarks.svg"
                   className="bookmarksIcon"
@@ -39,7 +39,7 @@ export default function Header({clickCart}) {
               </Link>
             </li>
             <li className="profile">
-              <Link to='/purchases'>
+              <Link to='purchases'>
                 <img
                   src="img/profile.svg"
                   className="profileIcon"
