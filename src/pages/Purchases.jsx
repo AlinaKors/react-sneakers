@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import EmptyPage from '../components/EmptyPage';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useContext } from 'react';
+import SneakersContext from '../context';
 import axios from 'axios';
 
 export default function Purchases () {
 
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const {sneakers} = useContext(SneakersContext);
 
     useEffect(() => {
         (async() =>  {
@@ -20,7 +22,7 @@ export default function Purchases () {
             console.error(error);
           }
         })();
-      }, []);
+      }, [sneakers]);
 
     return( 
         orders && orders.length > 0 ?
@@ -34,7 +36,7 @@ export default function Purchases () {
             <div className='sneakersWrapper'>
               {orders.map(itemOrder => {
                 return(
-                  <Fragment>
+                  <Fragment key={itemOrder.id}>
                     <div className='orderName'>Заказ {itemOrder.id}</div> 
                     <ul>
                     {itemOrder.order.map((item) =>  

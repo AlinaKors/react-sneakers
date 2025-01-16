@@ -2,16 +2,15 @@ import { Fragment } from "react";
 import styles from "./Card.module.scss";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import SneakersContext from '../../context';
-
 
 export default function Card({
   product,
   isLoading,
 }) {
 
-  const page = window.location.pathname === '/purchases';
+  const page = window.location.pathname.includes('purchases');
 
   const {deleteCart, addingCart, dislikeProduct, likeProduct} = useContext(SneakersContext);
 
