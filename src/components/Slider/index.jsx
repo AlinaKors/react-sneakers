@@ -14,9 +14,9 @@ export default function Slider() {
         <div className={styles.containerSlider}>
           <div className={styles.containerBtn}>
             <button className={styles.nextSlider} 
-              onClick={() => swiperRef.current?.slideNext()}><img src='/img/nextArrow.svg' alt="Next button"></img></button>
+              onClick={() => swiperRef.current?.slideNext()}><img src='img/nextArrow.svg' alt="Next button"></img></button>
             <button className={styles.prevSlider} 
-              onClick={() => swiperRef.current?.slidePrev()}><img src='/img/nextArrow.svg' alt="Prev button"></img></button>
+              onClick={() => swiperRef.current?.slidePrev()}><img src='img/nextArrow.svg' alt="Prev button"></img></button>
           </div>
           <Swiper
           modules={[Navigation, Autoplay]}
@@ -36,12 +36,10 @@ export default function Slider() {
           }}
           className={styles.mySwiper}
           >
-          <SwiperSlide><img src="/img/banner.png" className={styles.banner} alt="banner 1" /></SwiperSlide>
-          <SwiperSlide><img src="/img/banner2.png" className={styles.banner} alt="banner 2" /></SwiperSlide>
-          <SwiperSlide><img src="/img/banner3.png" className={styles.banner} alt="banner 3" /></SwiperSlide>
-          <SwiperSlide><img src="/img/banner4.png" className={styles.banner} alt="banner 4" /></SwiperSlide>
-          {/* <SliderBtn
-          directionSlide={'prevSlider'}/> */}
+          <SwiperSlide><img src="img/banner.png" className={styles.banner} alt="banner 1" /></SwiperSlide>
+          <SwiperSlide><img src="img/banner2.png" className={styles.banner} alt="banner 2" /></SwiperSlide>
+          <SwiperSlide><img src="img/banner3.png" className={styles.banner} alt="banner 3" /></SwiperSlide>
+          <SwiperSlide><img src="img/banner4.png" className={styles.banner} alt="banner 4" /></SwiperSlide>
           </Swiper>
         </div>
 

@@ -6,12 +6,12 @@ export default function Header({clickCart}) {
   const {totalPrice} = useCart();
     return(
         <header>
-          <Link to='/' >
+          <Link to='/'>
             <div className={styles.headerLeft}>
               <img
                 height="40"
                 width="40"
-                src="/img/logo.png"
+                src="img/logo.png"
                 alt="logo shop"
               />
               <div>
@@ -24,14 +24,14 @@ export default function Header({clickCart}) {
           <ul>
             <li className={styles.cart} onClick={clickCart}>
               <a>
-                <img src="/img/cart.svg" className="cartIcon" alt="icon cart" />
+                <img src="img/cart.svg" className="cartIcon" alt="icon cart" />
                 <span>{totalPrice} руб.</span>
               </a>
             </li>
             <li className="bookmarks">
-              <Link to='/favourites'>
+              <Link to='favourites'>
                 <img
-                  src="/img/bookmarks.svg"
+                  src="img/bookmarks.svg"
                   className="bookmarksIcon"
                   alt="icon bookmarks"
                 />
@@ -39,9 +39,9 @@ export default function Header({clickCart}) {
               </Link>
             </li>
             <li className="profile">
-              <Link to='/purchases'>
+              <Link to='purchases'>
                 <img
-                  src="/img/profile.svg"
+                  src="img/profile.svg"
                   className="profileIcon"
                   alt="icon profile"
                 />

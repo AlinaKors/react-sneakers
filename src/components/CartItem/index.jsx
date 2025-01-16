@@ -12,7 +12,7 @@ export default function CartItem({product, deleteCart}) {
                 <div className={styles.price}>
                   <strong>{product.price.toLocaleString('ru-RU')} руб.</strong>
                   <img
-                    src="/img/deletecart.svg"
+                    src="img/deletecart.svg"
                     className="deleteIcon"
                     alt="delete cart"
                     onClick={() => {deleteCart(product)}}

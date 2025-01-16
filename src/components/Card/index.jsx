@@ -2,16 +2,15 @@ import { Fragment } from "react";
 import styles from "./Card.module.scss";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import SneakersContext from '../../context';
-
 
 export default function Card({
   product,
   isLoading,
 }) {
 
-  const page = window.location.pathname === '/purchases';
+  const page = window.location.pathname.includes('purchases');
 
   const {deleteCart, addingCart, dislikeProduct, likeProduct} = useContext(SneakersContext);
 
@@ -30,8 +29,8 @@ export default function Card({
           <img
             src={
               product.isFavourite
-                ? "/img/addingFavorite.svg"
-                : "/img/favorite.svg"
+                ? "img/addingFavorite.svg"
+                : "img/favorite.svg"
             }
             className={page ? styles.none : styles.favoriteIcon}
             alt="favorite icon"
