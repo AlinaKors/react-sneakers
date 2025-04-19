@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+Приложение интернет-магазина, с помощью следующих технологий:
+
+- JavaScript
+- HTML + CSS (SCSS) (CSS module)
+- React (Context + Hooks)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
